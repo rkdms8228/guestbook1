@@ -24,7 +24,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="./add.jsp" method="post">
+	<form action="./add.jsp" method="get">
+	<!-- form 메소드에 post로 작성하면 한글 깨짐 -->
 	<table border="1">
 	<colgroup>
 			<col style="width: 50px;">
