@@ -45,7 +45,7 @@
 		</tr>
 		<tr>
 			<td colspan="4">
-			<input type="hidden" name="date" value="<%=regDate%>">
+			<input type="hidden" name="rdate" value="<%=regDate%>">
 			<button type="submit">확인</button>
 			</td>
 		</tr>
