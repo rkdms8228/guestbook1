@@ -107,8 +107,51 @@ public class GuestbookDao {
 		
 	}
 	
+	public GuestbookVo getDeleteGuest(int deleteNo) {
+		
+		GuestbookVo guest = null;
+		
+		getConnection();
+		
+		try {
+
+			// 3. SQL문 준비 / 바인딩 / 실행 --> 완성된 sql문을 가져와서 작성할것
+			String query = "";
+			query += " select guestbook_no ";
+			query += "         ,name ";
+			query += "         ,password ";
+			query += "         ,content ";
+			query += "         ,to_char(reg_date, 'YYYY-MM-DD HH:MI:SS') rdate ";
+			query += " from guestbook ";
+			query += " where guestbook_no = ? ";
+
+			pstmt = conn.prepareStatement(query); // 쿼리로 만들기
+			pstmt.setInt(1, deleteNo);
+
+			rs = pstmt.executeQuery();
+
+			// 4.결과처리
+			while (rs.next()) {
+				int guestbookNo = rs.getInt("guestbook_no");
+				String name = rs.getString("name");
+				String password = rs.getString("password");
+				String content = rs.getString("content");
+				String regdate = rs.getString("rdate");
+
+				guest = new GuestbookVo(guestbookNo, name, password, content, regdate);
+			}
+
+		} catch (SQLException e) {
+			System.out.println("error:" + e);
+		}
+
+		close();
+		
+		return guest;
+	}
+	
 	//정보 삭제 메소드
-	public int guestDelete(int guestbookNo) {
+	public int guestDelete(int deleteNo) {
 		
 		int count = -1;
 		
@@ -125,7 +168,7 @@ public class GuestbookDao {
 			
 			//바인딩
 			pstmt = conn.prepareStatement(query);
-			pstmt.setInt(1, guestbookNo);
+			pstmt.setInt(1, deleteNo);
 			
 			//실행
 			count = pstmt.executeUpdate();
