@@ -6,16 +6,21 @@
 
 <%
 	//파라미터 값 가져오기
-	int guestbookNo = Integer.parseInt(request.getParameter("guestbookNo"));
+	int deleteNo = Integer.parseInt(request.getParameter("delete_no"));
+	String deletePw = request.getParameter("delete_password");
 
-	//PhoneDao 객체 만들기
-	GuestbookDao guestbookDao = new GuestbookDao();
+
+	GuestbookDao guestDao = new GuestbookDao();
+	GuestbookVo guest = guestDao.getDeleteGuest(deleteNo);
 	
-	//PhoneDao의 personDelete()를 이용해서 삭제하기
-	guestbookDao.guestDelete(guestbookNo);
-	int count = guestbookDao.guestDelete(guestbookNo);
-	System.out.println(count);
-	
-	response.sendRedirect("./addList.jsp");
+	if(guest.getPassword().equals(deletePw)) {
+		
+		//입력한 비밀번호가 같으면 삭제
+		guestDao.guestDelete(deleteNo);
+		response.sendRedirect("./addList.jsp");
+		
+	} else { //틀리면 그냥 메인으로 돌아가기
+		response.sendRedirect("./addList.jsp");
+	}
 	
 %>
