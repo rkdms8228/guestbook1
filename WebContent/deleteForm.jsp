@@ -12,6 +12,10 @@
 </head>
 <body>
 
+	<h2>방명록 삭제</h2>
+	
+	<p>삭제를 원하시면 비밀번호를 입력해 주세요.</p>
+
 	<form action="./delete.jsp" method="post">
 		<input type="hidden" name="delete_no" value="<%=deleteNo%>">
 		비밀번호  <input type="password" name="delete_password" value="">
