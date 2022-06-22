@@ -20,5 +20,4 @@
 	System.out.println(count);
 	
 	response.sendRedirect("./addList.jsp");
-	
 %>

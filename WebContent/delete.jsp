@@ -22,5 +22,4 @@
 	} else { //틀리면 그냥 메인으로 돌아가기
 		response.sendRedirect("./addList.jsp");
 	}
-	
 %>
